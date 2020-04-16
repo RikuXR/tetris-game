@@ -46,8 +46,14 @@ const PIECES = [
   [J, "orange"],
 ];
 
+// Generate random Piece
+function randomPiece() {
+  let r = (randomN = Math.floor(Math.random() * PIECES.length));
+  return new Piece(PIECES[r][0], PIECES[r][1]);
+}
+
 // Initiate a Piece
-let p = new Piece(PIECES[0][0], PIECES[0][1]);
+let p = randomPiece();
 
 // The object piece
 function Piece(tetromino, color) {
