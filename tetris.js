@@ -145,6 +145,8 @@ Piece.prototype.rotate = function () {
   }
 };
 
+let score = 0;
+
 Piece.prototype.lock = function () {
   for (let r = 0; r < this.activeTetromino.length; r++) {
     for (let c = 0; c < this.activeTetromino.length; c++) {
@@ -161,6 +163,30 @@ Piece.prototype.lock = function () {
       // lock
       board[this.y + r][this.x + c] = this.color;
     }
+  }
+  // remove full rows
+  for (r = 0; r < ROW; r++) {
+    let isRowFull = true;
+
+    for (c = 0; c < COL; c++) {
+      isRowFull = isRowFull && board[r][c] !== VACANT;
+    }
+
+    if (isRowFull) {
+      for (y = r; y > 1; y--) {
+        for (c = 0; c < COL; c++) {
+          board[y][c] = boad[y - 1][c];
+        }
+      }
+
+      for (c = 0; c < COL; c++) {
+        board[0][c] = VACANT;
+      }
+
+      score += 10;
+    }
+
+    drawBoard();
   }
 };
 
