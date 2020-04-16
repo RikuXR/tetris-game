@@ -46,6 +46,9 @@ const PIECES = [
   [J, "orange"],
 ];
 
+// Initiate a Piece
+let p = new Piece(PIECES[0][0], PIECES[0][1]);
+
 // The object piece
 function Piece(tetromino, color) {
   this.tetromino = tetromino;
@@ -57,3 +60,16 @@ function Piece(tetromino, color) {
   this.x = 0;
   this.y = 0;
 }
+
+// Draw a Piece to the board
+Piece.prototype.draw = function () {
+  for (let r = 0; r < this.activeTetromino.length; r++) {
+    for (let c = 0; c < this.activeTetromino.length; c++) {
+      if (this.activeTetromino[r][c]) {
+        drawSquare(this.x + c, this.y + r, this.color);
+      }
+    }
+  }
+};
+
+p.draw();
