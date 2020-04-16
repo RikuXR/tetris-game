@@ -72,7 +72,6 @@ Piece.prototype.unDraw = function () {
 };
 
 // Fill function
-
 Piece.prototype.fill = function (color) {
   for (let r = 0; r < this.activeTetromino.length; r++) {
     for (let c = 0; c < this.activeTetromino.length; c++) {
@@ -87,6 +86,20 @@ Piece.prototype.fill = function (color) {
 Piece.prototype.moveDown = function () {
   this.unDraw();
   this.y++;
+  this.draw();
+};
+
+// Move Right the Piece
+Piece.prototype.moveRight = function () {
+  this.unDraw();
+  this.x++;
+  this.draw();
+};
+
+// Move Left the Piece
+Piece.prototype.moveLeft = function () {
+  this.unDraw();
+  this.x--;
   this.draw();
 };
 
