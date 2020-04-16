@@ -111,6 +111,24 @@ Piece.prototype.rotate = function () {
   this.draw();
 };
 
+// Control the Piece
+document.addEventListener("keydown", CONTROL);
+
+function CONTROL(e) {
+  if (event.keyCode === 37) {
+    p.moveLeft();
+    dropStart = Date.now();
+  } else if (event.keyCode === 38) {
+    p.rotate();
+    dropStart = Date.now();
+  } else if (event.keyCode === 39) {
+    p.moveRight();
+    dropStart = Date.now();
+  } else if (event.keyCode === 40) {
+    p.moveDown();
+  }
+}
+
 // Drop the piece every second
 
 let dropStart = Date.now();
