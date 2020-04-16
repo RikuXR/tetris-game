@@ -103,6 +103,14 @@ Piece.prototype.moveLeft = function () {
   this.draw();
 };
 
+// Rotate the Piece
+Piece.prototype.rotate = function () {
+  this.unDraw();
+  this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
+  this.activeTetromino = this.tetromino[this.tetrominoN];
+  this.draw();
+};
+
 // Drop the piece every second
 
 let dropStart = Date.now();
