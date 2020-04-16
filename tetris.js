@@ -15,4 +15,11 @@ function drawSquare(x, y, color) {
   ctx.strokeRect(x * SQ, y * SQ, SQ, SQ);
 }
 
-draw(0, 0, "red");
+// Create the board
+let board = [];
+for (let r = 0; r < ROW; r++) {
+  board[r] = [];
+  for (let c = 0; c < COL; c++) {
+    board[r][c] = VACANT;
+  }
+}
