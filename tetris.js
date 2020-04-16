@@ -84,31 +84,68 @@ Piece.prototype.fill = function (color) {
 
 // Move Down the Piece
 Piece.prototype.moveDown = function () {
-  this.unDraw();
-  this.y++;
-  this.draw();
+  if (!this.collision(0, 1, this.activeTetromino)) {
+    this.unDraw();
+    this.y++;
+    this.draw();
+  }
 };
 
 // Move Right the Piece
 Piece.prototype.moveRight = function () {
-  this.unDraw();
-  this.x++;
-  this.draw();
+  if (!this.collision(1, 0, this.activeTetromino)) {
+    this.unDraw();
+    this.x++;
+    this.draw();
+  }
 };
 
 // Move Left the Piece
 Piece.prototype.moveLeft = function () {
-  this.unDraw();
-  this.x--;
-  this.draw();
+  if (!this.collision(-1, 0, this.activeTetromino)) {
+    this.unDraw();
+    this.x--;
+    this.draw();
+  }
 };
 
 // Rotate the Piece
 Piece.prototype.rotate = function () {
-  this.unDraw();
-  this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
-  this.activeTetromino = this.tetromino[this.tetrominoN];
-  this.draw();
+  let nextPattern = this.tetromino[
+    (this.tetrominoN + 1) % this.tetromino.length
+  ];
+
+  if (!this.collision(0, 0, nextPattern)) {
+    this.unDraw();
+    this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
+    this.activeTetromino = this.tetromino[this.tetrominoN];
+    this.draw();
+  }
+};
+
+// Collision function
+Piece.prototype.collision = function (x, y, piece) {
+  for (let r = 0; r < piece.length; r++) {
+    for (let c = 0; c < piece.length; c++) {
+      // if the square is empty skip
+      if (!piece[r][c]) {
+        continue;
+      }
+      // coordinates of the piece after movement
+      let newX = this.x + c + x,
+        newY = this.y + r + y;
+
+      if (newX < 0 || newX > COL || newY >= ROW) return true;
+
+      // skip newY < 0; board[-1] will crush
+      if (newY < 0) continue;
+
+      // check a locked piece
+      if (board[newY][newX] !== VACANT) return true;
+    }
+  }
+
+  return false;
 };
 
 // Control the Piece
