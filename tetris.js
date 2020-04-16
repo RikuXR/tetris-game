@@ -72,8 +72,20 @@ Piece.prototype.draw = function () {
   }
 };
 
+// Undraw a Piece
+Piece.prototype.unDraw = function () {
+  for (let r = 0; r < this.activeTetromino.length; r++) {
+    for (let c = 0; c < this.activeTetromino.length; c++) {
+      if (this.activeTetromino[r][c]) {
+        drawSquare(this.x + c, this.y + r, VACANT);
+      }
+    }
+  }
+};
+
 // Move Down the Piece
 Piece.prototype.moveDown = function () {
+  this.unDraw();
   this.y++;
   this.draw();
 };
