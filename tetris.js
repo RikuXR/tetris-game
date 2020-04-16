@@ -34,3 +34,15 @@ function drawBoard() {
 }
 
 drawBoard();
+
+// The object piece
+function Piece(tetromino, color) {
+  this.tetromino = tetromino;
+  this.color = color;
+
+  this.tetrominoN = 0;
+  this.activeTetromino = this.tetromino[this.tetrominoN];
+
+  this.x = 0;
+  this.y = 0;
+}
