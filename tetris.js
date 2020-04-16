@@ -1,5 +1,6 @@
 const cvs = document.getElementById("tetris"),
-  ctx = cvs.getContext("2d");
+  ctx = cvs.getContext("2d"),
+  scoreDOM = document.getElementById("score");
 
 const ROW = 20,
   COL = (COLUMN = 10),
@@ -175,7 +176,7 @@ Piece.prototype.lock = function () {
     if (isRowFull) {
       for (y = r; y > 1; y--) {
         for (c = 0; c < COL; c++) {
-          board[y][c] = boad[y - 1][c];
+          board[y][c] = board[y - 1][c];
         }
       }
 
@@ -187,6 +188,8 @@ Piece.prototype.lock = function () {
     }
 
     drawBoard();
+
+    scoreDOM.innerHTML = score;
   }
 };
 
