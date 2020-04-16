@@ -115,8 +115,21 @@ Piece.prototype.rotate = function () {
     (this.tetrominoN + 1) % this.tetromino.length
   ];
 
-  if (!this.collision(0, 0, nextPattern)) {
+  let kick = 0;
+
+  if (this.collision(0, 0, nextPattern)) {
+    if (this.x > COL / 2) {
+      // right wall
+      kick = -1;
+    } else {
+      // left wall
+      kick = 1;
+    }
+  }
+
+  if (!this.collision(kick, 0, nextPattern)) {
     this.unDraw();
+    this.x += kick;
     this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
     this.activeTetromino = this.tetromino[this.tetrominoN];
     this.draw();
