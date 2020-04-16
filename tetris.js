@@ -72,4 +72,8 @@ Piece.prototype.draw = function () {
   }
 };
 
-p.draw();
+// Move Down the Piece
+Piece.prototype.moveDown = function () {
+  this.y++;
+  this.draw();
+};
